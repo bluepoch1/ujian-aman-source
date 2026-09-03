@@ -1,0 +1,90 @@
+rules_version = 2;
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isAuth() {
+      return request.auth != null;
+    }
+    function isPengawas() {
+      return isAuth() && exists(/databases/$(database)/documents/pengawas/$(request.auth.uid));
+    }
+    function isAdmin() {
+      return isAuth() && get(/databases/$(database)/documents/pengguna/$(request.auth.uid)).data.role == "admin";
+    }
+    function isOwner(userId) {
+      return isAuth() && request.auth.uid == userId;
+    }
+
+    // ── tokens ── (exam tokens)
+    match /tokens/{tokenId} {
+      allow read: if isPengawas() || isAdmin();
+      allow create: if isPengawas() || isAdmin();
+      allow update: if isPengawas() || isAdmin();
+      allow delete: if isPengawas() || isAdmin();
+    }
+
+    // ── sessions ── (exam sessions)
+    match /sessions/{sessionId} {
+      allow read: if isPengawas() || isAdmin() || (isAuth() && resource.data.uid == request.auth.uid);
+      allow create: if isAuth();
+      allow update: if (
+        isPengawas() || isAdmin() ||
+        (isAuth() && resource.data.uid == request.auth.uid
+         && onlyFieldsChanged(["terakhir_aktif"])
+         && resource.data.status == "aktif")
+      );
+      allow delete: if isPengawas() || isAdmin();
+    }
+
+    // ── violations ──
+    match /violations/{violationId} {
+      allow read: if isPengawas() || isAdmin() || (isAuth() && isMyViolation());
+      allow create: if isAuth();
+      allow delete: if isPengawas() || isAdmin();
+    }
+
+    function isMyViolation() {
+      return exists(/databases/$(database)/documents/sessions/$(resource.data.sessionId))
+        && get(/databases/$(database)/documents/sessions/$(resource.data.sessionId)).data.uid == request.auth.uid;
+    }
+
+    // ── pengawas ──
+    match /pengawas/{uid} {
+      allow read: if isOwner(uid) || isPengawas() || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // ── pengguna ──
+    match /pengguna/{uid} {
+      allow read: if isAdmin() || isOwner(uid);
+      allow create: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin() && uid != request.auth.uid;
+    }
+
+    // ── kelas ──
+    match /kelas/{classId} {
+      allow read: if isAdmin() || (isAuth() && resource.data.dibuat_oleh == request.auth.uid);
+      allow create: if isAdmin();
+      allow update: if isAuth() && resource.data.dibuat_oleh == request.auth.uid;
+      allow delete: if isAuth() && resource.data.dibuat_oleh == request.auth.uid;
+    }
+
+    // ── percobaan_klaim ── (rate limiting)
+    match /percobaan_klaim/{attemptId} {
+      allow read: if isAdmin();
+      allow create: if isAuth();
+    }
+
+    // ── bot_pengguna ── (Telegram bot users) - admin only
+    match /bot_pengguna/{chatId} {
+      allow read, write: if false;
+    }
+
+    // ── bot_log ── (Telegram bot logs) - admin only
+    match /bot_log/{logId} {
+      allow read, write: if false;
+    }
+  }
+}
