@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/space_6"
+    android:layout_marginEnd="@dimen/space_6"
+    android:background="@drawable/surface_dialog"
+    android:orientation="vertical"
+    android:padding="@dimen/space_6">
+
+    <FrameLayout
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/icon_tile_danger">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_warning"
+            app:tint="@color/danger"
+            android:importantForAccessibility="no" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_block_title"
+        style="@style/Text.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_4"
+        tools:text="USB debugging aktif" />
+
+    <TextView
+        android:id="@+id/tv_block_message"
+        style="@style/Text.Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_1"
+        tools:text="Matikan USB debugging di Opsi pengembang, lalu periksa ulang." />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_buka_settings"
+        style="@style/Button.Primary"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/space_5"
+        android:text="@string/check_open_settings" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_recheck"
+        style="@style/Button.Secondary"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/space_2"
+        android:text="@string/check_recheck" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_keluar_block"
+        style="@style/Button.Ghost"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/space_1"
+        android:text="@string/check_quit"
+        android:textColor="@color/danger" />
+
+</LinearLayout>

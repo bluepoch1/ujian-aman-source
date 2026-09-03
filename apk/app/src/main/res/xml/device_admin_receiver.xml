@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Device Admin metadata untuk SafeBrowser.
+
+  Izin yang diminta hanya:
+  - LOCK_TASK: Mengunci peserta ke aplikasi selama ujian berlangsung.
+
+  Izin yang TIDAK diminta (sengaja):
+  - WIPE_DATA: Tidak ada alasan aplikasi ujian menghapus data perangkat.
+  - RESET_PASSWORD: Tidak perlu mengubah password perangkat.
+  - WATCH_LOGIN: Tidak perlu memantau login attempts.
+  - EXPIRE_PASSWORD: Tidak perlu mengatur masa berlaku password.
+-->
+<device-admin>
+    <uses-policies>
+        <force-lock />
+    </uses-policies>
+</device-admin>

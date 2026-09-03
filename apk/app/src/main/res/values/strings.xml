@@ -1,0 +1,163 @@
+<resources>
+    <string name="app_name">Ujian Aman</string>
+    <string name="app_tagline">Platform Ujian Terpercaya</string>
+    <string name="app_version">Ujian Aman 3.0</string>
+    <string name="battery_percent">%1$d%%</string>
+    <string name="app_version_short">Versi 3.0</string>
+    <string name="badge_safe">Aman</string>
+    <string name="badge_blocked">Diblokir</string>
+    <string name="duration_minutes">%1$d menit</string>
+    <string name="value_none">—</string>
+    <string name="uninstaller_failed">Tidak dapat membuka penghapus aplikasi.</string>
+    <string name="settings_failed">Tidak dapat membuka Pengaturan.</string>
+    <string name="gallery_unavailable">Galeri tidak tersedia.</string>
+    <string name="quit_confirm_message">Tutup Ujian Aman?</string>
+    <string name="action_cancel">Batal</string>
+    <string name="action_close">Tutup</string>
+    <string name="exam_url_invalid">URL ujian tidak valid</string>
+    <string name="exam_link_blocked">Tautan luar diblokir selama ujian.</string>
+    <string name="net_offline">Offline</string>
+    <string name="net_wifi">WiFi</string>
+    <string name="net_wifi_weak">WiFi lemah</string>
+    <string name="net_cellular">Seluler</string>
+    <string name="net_ethernet">LAN</string>
+    <string name="net_generic">Jaringan</string>
+
+    <!-- Gerbang masuk -->
+    <string name="gate_title">Masuk ke ujian</string>
+    <string name="gate_subtitle">Masukkan token dari pengawas, atau pindai kode QR yang ditampilkan di kelas.</string>
+    <string name="gate_token_label">Token ujian</string>
+    <string name="gate_token_hint">000000</string>
+    <string name="gate_open">Lanjutkan</string>
+    <string name="gate_scan">Pindai kode QR</string>
+    <string name="gate_or">atau</string>
+    <string name="gate_checking">Memeriksa token…</string>
+
+    <string name="err_token_empty">Masukkan token ujian terlebih dahulu.</string>
+    <string name="err_token_format">Token hanya terdiri dari angka.</string>
+    <string name="err_network">Tidak dapat terhubung ke server. Periksa koneksi Anda.</string>
+    <string name="err_token_unknown">Token tidak dikenali atau sudah dinonaktifkan.</string>
+    <string name="err_token_expired">Masa berlaku token sudah habis.</string>
+    <string name="err_token_parse">Data ujian tidak dapat dibaca. Hubungi pengawas.</string>
+
+    <!-- Konfirmasi ujian -->
+    <string name="confirm_title">Konfirmasi ujian</string>
+    <string name="confirm_duration">Durasi</string>
+    <string name="confirm_expires">Berlaku hingga</string>
+    <string name="confirm_notice">Setelah dimulai, perangkat akan terkunci pada ujian ini. Keluar dari aplikasi dapat dicatat sebagai pelanggaran.</string>
+    <string name="confirm_start">Mulai ujian</string>
+    <string name="confirm_cancel">Batal</string>
+
+    <!-- Pemeriksaan keamanan -->
+    <string name="check_open_settings">Buka pengaturan</string>
+    <string name="check_quit">Tutup aplikasi</string>
+    <string name="check_recheck">Periksa ulang</string>
+
+    <string name="check_emulator_title">Emulator terdeteksi</string>
+    <string name="check_emulator_body">Ujian hanya dapat dijalankan pada perangkat fisik, bukan emulator atau mesin virtual.</string>
+    <string name="check_root_title">Perangkat ter-root</string>
+    <string name="check_root_body">Perangkat yang telah di-root tidak diizinkan mengikuti ujian untuk menjaga integritas. Nonaktifkan root atau gunakan perangkat lain.</string>
+    <string name="check_adb_title">USB debugging aktif</string>
+    <string name="check_adb_body">Matikan USB debugging di Opsi pengembang, lalu periksa ulang.</string>
+    <string name="check_mock_title">Lokasi palsu aktif</string>
+    <string name="check_mock_body">Matikan aplikasi lokasi palsu sebelum mengikuti ujian.</string>
+
+    <string name="check_a11y_title">Layanan aksesibilitas terdeteksi</string>
+    <string name="check_a11y_body">Nonaktifkan layanan aksesibilitas dari aplikasi remote desktop/sebelum mengikuti ujian.</string>
+
+    <string name="check_vpn_title">VPN aktif</string>
+    <string name="check_vpn_body">Putuskan koneksi VPN sebelum mengikuti ujian untuk menjaga keamanan.</string>
+
+    <string name="check_apps_title">Hapus aplikasi berikut</string>
+    <string name="check_apps_body">Aplikasi ini tidak diizinkan selama ujian berlangsung. Hapus semuanya untuk melanjutkan.</string>
+    <string name="check_apps_done">Saya sudah menghapus</string>
+    
+    <string name="check_apps_cleared">Perangkat sudah bersih. Silakan lanjutkan.</string>
+    <string name="check_uninstall">Hapus</string>
+
+    <!-- Pemindai -->
+    <string name="scan_title">Pindai kode QR</string>
+    <string name="scan_hint">Arahkan kamera ke kode QR ujian</string>
+    <string name="scan_cancel">Batal</string>
+    <string name="scan_camera">Gunakan kamera</string>
+    <string name="scan_gallery">Pilih dari galeri</string>
+    <string name="scan_source_title">Sumber kode QR</string>
+    <string name="scan_no_code">Kode QR tidak ditemukan pada gambar.</string>
+    <string name="scan_camera_denied">Izin kamera diperlukan untuk memindai.</string>
+    <string name="scan_camera_failed">Kamera tidak dapat dibuka.</string>
+
+    <!-- Ujian -->
+    <string name="exam_offline_title">Koneksi terputus</string>
+    <string name="exam_offline_body">Jawaban Anda tetap tersimpan. Kami akan menyambung kembali secara otomatis.</string>
+    <string name="exam_error_title">Halaman gagal dimuat</string>
+    <string name="exam_retry">Muat ulang</string>
+    <string name="exam_back">Kembali</string>
+    <string name="exam_forward">Maju</string>
+    <string name="exam_refresh">Muat ulang</string>
+    <string name="exam_exit">Keluar</string>
+
+    <string name="exit_title">Keluar dari ujian?</string>
+    <string name="exit_body">Ujian akan ditutup dan sesi Anda berakhir. Tindakan ini tidak dapat dibatalkan.</string>
+    <string name="exit_confirm">Ya, keluar</string>
+    <string name="exit_cancel">Lanjutkan ujian</string>
+
+    <string name="focus_title">Kembali ke ujian</string>
+    
+
+    <string name="pinned_title">Sematkan layar</string>
+    <string name="pinned_body">Layar akan disematkan agar Anda tidak keluar dari ujian secara tidak sengaja.</string>
+    <string name="pinned_understood">Saya mengerti</string>
+
+    <string name="headset_blocked">Perangkat audio eksternal tidak diizinkan selama ujian.</string>
+
+    <plurals name="check_apps_remaining">
+        <item quantity="one">Masih ada %1$d aplikasi yang harus dihapus.</item>
+        <item quantity="other">Masih ada %1$d aplikasi yang harus dihapus.</item>
+    </plurals>
+
+    <plurals name="focus_body">
+        <item quantity="one">Anda meninggalkan layar ujian. Aplikasi akan ditutup otomatis dalam %1$d detik.</item>
+        <item quantity="other">Anda meninggalkan layar ujian. Aplikasi akan ditutup otomatis dalam %1$d detik.</item>
+    </plurals>
+
+    <string name="badge_issues">%1$d masalah</string>
+
+    <!-- ── Fase 3: identitas peserta ────────────────────────── -->
+    <string name="gate_nama_label">Nama lengkap</string>
+    <string name="gate_nama_hint">Sesuai daftar hadir</string>
+    <string name="gate_nomor_label">Nomor peserta</string>
+    <string name="gate_nomor_hint">Opsional</string>
+    <string name="err_nama_empty">Nama lengkap wajib diisi.</string>
+    <string name="err_nama_pendek">Nama terlalu pendek.</string>
+
+    <!-- ── Fase 3: kesalahan server ─────────────────────────── -->
+    <string name="err_anon_disabled">Server ujian belum dikonfigurasi. Hubungi pengawas.</string>
+    <string name="err_config">Aplikasi belum terhubung ke server ujian.</string>
+
+    <!-- ── Fase 3: sesi &amp; timer ─────────────────────────────── -->
+    <string name="exam_time_up">Waktu ujian Anda sudah habis.</string>
+    <string name="exam_time_left">Sisa waktu</string>
+    <string name="exam_warning_5min">Waktu tersisa 5 menit. Segera periksa jawaban Anda.</string>
+    <string name="exam_warning_1min">Waktu tersisa 1 menit.</string>
+    <string name="exam_ended_title">Ujian berakhir</string>
+    <string name="exam_stopped_title">Sesi dihentikan</string>
+    <string name="exam_reentry">Anda masuk kembali ke ujian. Kejadian ini dicatat pengawas.</string>
+    <string name="exam_offline_badge">Tersambung ulang…</string>
+    <string name="exam_pending_violations">%1$d catatan menunggu terkirim</string>
+    <string name="exam_close">Tutup</string>
+    <string name="scan_bukan_token">Kode QR ini bukan token ujian yang sah.</string>
+    <string name="app_loading">Memuat…</string>
+    <string name="token_subtitle">Masuk ke sesi ujian</string>
+    <string name="token_hint">Masukkan token ujian</string>
+    <string name="token_nama_hint">Nama lengkap</string>
+    <string name="token_nomor_hint">Nomor peserta (opsional)</string>
+    <string name="token_submit">Masuk Ujian</string>
+    <string name="token_scan_qr">Pindai QR Code</string>
+    <string name="token_help">Token diberikan oleh pengawas sebelum ujian dimulai</string>
+
+    <string name="exit_temporary">Keluar Sementara</string>
+    <string name="exit_temp_body">Anda akan keluar dari ujian. Sesi akan dijeda. Masukkan token lagi untuk melanjutkan.</string>
+    <string name="exit_temp_confirm">Keluar &amp; Jeda Sesi</string>
+    <string name="session_paused">Sesi dijeda</string>
+    <string name="session_paused_body">Sesi ujian Anda dijeda. Masukkan token lagi untuk melanjutkan.</string>
+</resources>

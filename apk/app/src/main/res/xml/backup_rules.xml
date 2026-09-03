@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Backup rules untuk Android 11 (API 30) dan lebih lama.
+
+  Karena allowBackup="false", file ini hanya sebagai jaring pengaman
+  jika manifest di-override oleh device policy.
+-->
+<full-backup-content>
+    <!-- Jangan backup auth tokens dan session data -->
+    <exclude domain="sharedpref" path="sb_auth.xml" />
+    <exclude domain="sharedpref" path="exam_session.xml" />
+    <exclude domain="sharedpref" path="violation_queue.xml" />
+    <exclude domain="sharedpref" path="device_identity.xml" />
+
+    <!-- Jangan backup cache WebView -->
+    <exclude domain="file" path="cache" />
+    <exclude domain="external" path="." />
+</full-backup-content>

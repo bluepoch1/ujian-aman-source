@@ -1,5 +1,11 @@
 node_modules/
 .env
+.env.local
 serviceAccountKey.json
 functions/node_modules/
 .firebase/
+*.apk
+*.jks
+*.keystore
+local.properties
+secrets.properties
