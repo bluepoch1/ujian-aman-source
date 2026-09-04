@@ -18,7 +18,8 @@ service cloud.firestore {
 
     // ── tokens ── (exam tokens)
     match /tokens/{tokenId} {
-      allow read: if isPengawas() || isAdmin();
+      // Anonymous users can read tokens to validate their exam code
+      allow read: if isPengawas() || isAdmin() || isAuth();
       allow create: if isPengawas() || isAdmin();
       allow update: if isPengawas() || isAdmin();
       allow delete: if isPengawas() || isAdmin();
@@ -31,7 +32,6 @@ service cloud.firestore {
       allow update: if (
         isPengawas() || isAdmin() ||
         (isAuth() && resource.data.uid == request.auth.uid
-         && onlyFieldsChanged(["terakhir_aktif"])
          && resource.data.status == "aktif")
       );
       allow delete: if isPengawas() || isAdmin();
@@ -45,8 +45,8 @@ service cloud.firestore {
     }
 
     function isMyViolation() {
-      return exists(/databases/$(database)/documents/sessions/$(resource.data.sessionId))
-        && get(/databases/$(database)/documents/sessions/$(resource.data.sessionId)).data.uid == request.auth.uid;
+      return exists(/databases/$(database)/documents/sessions/$(resource.data.session_id))
+        && get(/databases/$(database)/documents/sessions/$(resource.data.session_id)).data.uid == request.auth.uid;
     }
 
     // ── pengawas ──
