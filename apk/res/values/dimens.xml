@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Spacing scale (4dp base) -->
+    <dimen name="space_0">0dp</dimen>
+    <dimen name="space_1">4dp</dimen>
+    <dimen name="space_2">8dp</dimen>
+    <dimen name="space_3">12dp</dimen>
+    <dimen name="space_4">16dp</dimen>
+    <dimen name="space_5">20dp</dimen>
+    <dimen name="space_6">24dp</dimen>
+    <dimen name="space_8">32dp</dimen>
+    <dimen name="space_10">40dp</dimen>
+    <dimen name="space_12">48dp</dimen>
+    <dimen name="space_16">64dp</dimen>
+
+    <!-- Border radius -->
+    <dimen name="radius_xs">4dp</dimen>
+    <dimen name="radius_sm">8dp</dimen>
+    <dimen name="radius_md">12dp</dimen>
+    <dimen name="radius_lg">16dp</dimen>
+    <dimen name="radius_xl">24dp</dimen>
+    <dimen name="radius_full">9999dp</dimen>
+
+    <!-- Touch targets -->
+    <dimen name="touch_min">48dp</dimen>
+
+    <!-- Chrome heights -->
+    <dimen name="chrome_top_height">40dp</dimen>
+    <dimen name="chrome_bottom_height">52dp</dimen>
+
+    <!-- Hairline -->
+    <dimen name="hairline">1dp</dimen>
+    <dimen name="page_gutter">24dp</dimen>
+</resources>

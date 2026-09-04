@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data-extraction-rules>
+    <cloud-backup>
+        <exclude domain="sharedpref" path="sb_auth.xml" />
+        <exclude domain="sharedpref" path="sb_auth_plain.xml" />
+        <exclude domain="sharedpref" path="exam_session.xml" />
+        <exclude domain="sharedpref" path="violation_queue.xml" />
+        <exclude domain="sharedpref" path="device_identity.xml" />
+        <exclude domain="file" path="cache" />
+    </cloud-backup>
+    <device-transfer>
+        <exclude domain="sharedpref" path="sb_auth.xml" />
+        <exclude domain="sharedpref" path="sb_auth_plain.xml" />
+        <exclude domain="sharedpref" path="exam_session.xml" />
+        <exclude domain="sharedpref" path="violation_queue.xml" />
+        <exclude domain="sharedpref" path="device_identity.xml" />
+        <exclude domain="file" path="cache" />
+    </device-transfer>
+</data-extraction-rules>

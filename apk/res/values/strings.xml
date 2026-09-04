@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Exam Clock</string>
+    <string name="app_name">Ujian Aman</string>
     <string name="app_tagline">Platform Ujian Terpercaya</string>
-    <string name="app_version">Exam Clock 3.0</string>
+    <string name="app_version">Ujian Aman 3.0</string>
     <string name="battery_percent">%1$d%%</string>
     <string name="app_version_short">Versi 3.0</string>
     <string name="badge_safe">Aman</string>
@@ -11,7 +11,7 @@
     <string name="uninstaller_failed">Tidak dapat membuka penghapus aplikasi.</string>
     <string name="settings_failed">Tidak dapat membuka Pengaturan.</string>
     <string name="gallery_unavailable">Galeri tidak tersedia.</string>
-    <string name="quit_confirm_message">Tutup Exam Clock?</string>
+    <string name="quit_confirm_message">Tutup Ujian Aman?</string>
     <string name="action_cancel">Batal</string>
     <string name="action_close">Tutup</string>
     <string name="exam_url_invalid">URL ujian tidak valid</string>

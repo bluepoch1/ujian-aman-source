@@ -9,36 +9,20 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!--
-      QUERY_ALL_PACKAGES adalah izin sensitif dan harus dibenarkan pada Play
-      Console. Tanpa ini, pemindaian berdasarkan label tidak melihat apa pun di
-      Android 11+, sehingga pemeriksaan aplikasi terlarang jadi tidak berguna.
-      Blok <queries> di bawah menangani daftar package yang sudah diketahui
-      tanpa memerlukan izin luas, jadi izin ini hanya menambah jaring pengaman
-      berbasis label. Hapus baris ini bila kebijakan Play Store menolaknya.
-    -->
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="QueryAllPackagesPermission" />
 
-    <!-- Visibilitas paket eksplisit: berfungsi tanpa izin sensitif. -->
     <queries>
         <package android:name="com.openai.chatgpt" />
         <package android:name="com.anthropic.claude" />
         <package android:name="ai.perplexity.app.android" />
         <package android:name="com.deepseek.chat" />
-        <package android:name="com.google.android.apps.bard" />
         <package android:name="com.google.android.apps.gemini" />
         <package android:name="com.microsoft.copilot" />
         <package android:name="com.microsoft.bing" />
-        <package android:name="com.quora.android" />
         <package android:name="ai.x.grok" />
         <package android:name="com.character.ai" />
         <package android:name="com.meta.ai" />
-        <package android:name="com.alibaba.tongyi" />
-        <package android:name="com.moonshot.kimichat" />
-        <package android:name="com.larus.nova" />
-        <package android:name="chat.mistral.ai" />
-        <package android:name="com.phind.app" />
         <package android:name="com.teamviewer.quicksupport.market" />
         <package android:name="com.teamviewer.teamviewer.market.mobile" />
         <package android:name="com.anydesk.anydeskandroid" />
@@ -48,11 +32,6 @@
         <package android:name="com.hecorat.screenrecorder.free" />
         <package android:name="com.kimcy929.screenrecorder" />
         <package android:name="com.duapps.recorder" />
-
-        <intent>
-            <action android:name="android.intent.action.PICK" />
-            <data android:mimeType="image/*" />
-        </intent>
     </queries>
 
     <uses-feature android:name="android.hardware.camera" android:required="false" />
@@ -60,8 +39,6 @@
 
     <application
         android:allowBackup="false"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -111,15 +88,8 @@
             android:theme="@style/AppTheme.Exam"
             tools:ignore="DiscouragedApi,LockedOrientationActivity" />
 
-        <activity
-            android:name=".PinnedActivity"
-            android:exported="false"
-            android:excludeFromRecents="true"
-            android:screenOrientation="portrait"
-            tools:ignore="DiscouragedApi,LockedOrientationActivity" />
-
         <receiver
-            android:name=".DeviceAdminReceiver"
+            android:name=".ExamClockDeviceAdmin"
             android:exported="true"
             android:permission="android.permission.BIND_DEVICE_ADMIN">
             <meta-data
@@ -131,5 +101,4 @@
         </receiver>
 
     </application>
-
 </manifest>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="surface">#FFF6F7F9</color>
+    <color name="surface_raised">#FFFFFFFF</color>
+    <color name="surface_sunken">#FFEDF0F4</color>
+    <color name="border">#FFE2E6EB</color>
+    <color name="border_strong">#FFD0D5DC</color>
+    <color name="ink">#FF1B1F23</color>
+    <color name="ink_muted">#FF636C76</color>
+    <color name="ink_faint">#FFA9B1BA</color>
+    <color name="ink_inverse">#FFFFFFFF</color>
+    <color name="accent">#FF5046E5</color>
+    <color name="accent_pressed">#FF4338CA</color>
+    <color name="accent_soft">#FFEEF2FF</color>
+    <color name="accent_border">#FFC7D2FE</color>
+    <color name="danger">#FFDC2626</color>
+    <color name="danger_soft">#FFFEF2F2</color>
+    <color name="danger_border">#FFFECACA</color>
+    <color name="success">#FF16A34A</color>
+    <color name="success_soft">#FFDCFCE7</color>
+    <color name="warning">#FFD97706</color>
+    <color name="warning_soft">#FFFEF3C7</color>
+    <color name="chrome">#FF13141A</color>
+    <color name="chrome_border">#FF232530</color>
+    <color name="chrome_ink">#FFF4F5F7</color>
+    <color name="chrome_ink_muted">#FF7C828C</color>
+    <color name="scrim">#99000000</color>
+    <color name="ripple">#225046E5</color>
+    <color name="transparent">#00000000</color>
+    <color name="home_bg">#FFF6F7F9</color>
+</resources>
