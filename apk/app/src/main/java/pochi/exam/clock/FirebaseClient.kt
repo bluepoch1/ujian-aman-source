@@ -56,23 +56,15 @@ object FirebaseClient {
 
         return when {
             msg.contains("PERMISSION_DENIED") || msg.contains("permission") ->
-                Gagal("PERMISSION", "Izin akses ditolak. Periksa konfigurasi aplikasi.")
+                Gagal("PERMISSION", "Izin akses ditolak. Hubungi pengawas ujian.")
             msg.contains("UNAUTHENTICATED") || msg.contains("auth") ->
                 Gagal("AUTH", "Gagal autentikasi. Coba lagi.")
             msg.contains("UNAVAILABLE") || msg.contains("network") || msg.contains("timeout") ->
                 Gagal("NETWORK", "Jaringan tidak tersedia. Periksa koneksi internet Anda.")
             msg.contains("NOT_FOUND") || msg.contains("not found") ->
                 Gagal("NOT_FOUND", "Data tidak ditemukan.")
-            msg.contains("ALREADY_EXISTS") || msg.contains("already exists") ->
-                Gagal("DUPLICATE", "Data sudah ada.")
-            msg.contains("FAILED_PRECONDITION") ->
-                Gagal("PRECONDITION", "Operasi tidak dapat dilakukan. Token mungkin belum aktif.")
-            msg.contains("INVALID_ARGUMENT") ->
-                Gagal("INVALID", "Data tidak valid. Periksa input Anda.")
             msg.contains("DEADLINE_EXCEEDED") || msg.contains("deadline") ->
                 Gagal("TIMEOUT", "Permintaan timeout. Coba lagi.")
-            msg.contains("CANCELLED") || msg.contains("cancelled") ->
-                Gagal("CANCELLED", "Operasi dibatalkan.")
             msg.contains("RESOURCE_EXHAUSTED") ->
                 Gagal("RATE_LIMIT", "Terlalu banyak permintaan. Coba lagi nanti.")
             else ->
