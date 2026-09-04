@@ -18,14 +18,12 @@ object FirebaseClient {
     private val db = FirebaseFirestore.getInstance()
     private val main = Handler(Looper.getMainLooper())
 
-    data class Sesi(
-        val sessionId: String = "", val url: String = "", val namaKelas: String = "",
+    data class Sesi(val sessionId: String = "", val url: String = "", val namaKelas: String = "",
         val mataPelajaran: String = "", val namaPeserta: String = "", val durasiMenit: Int = 0,
-        val sisaDetik: Long = 0, val masukUlang: Boolean = false, val batasWaktu: Date? = null
-    )
+        val sisaDetik: Long = 0, val masukUlang: Boolean = false, val batasWaktu: Date? = null)
     data class Gagal(val kode: String, val pesan: String)
     data class Detak(val sisaDetik: Long = 0, val status: String = "aktif",
-                     val sesiHilang: Boolean = false, val pesan: String = "")
+        val sesiHilang: Boolean = false, val pesan: String = "")
     interface SesiCallback { fun onBerhasil(sesi: Sesi); fun onGagal(gagal: Gagal) }
     interface DetakCallback { fun onDetak(detak: Detak); fun onOffline() }
     interface SimpleCallback { fun onSelesai(berhasil: Boolean) }
@@ -33,7 +31,7 @@ object FirebaseClient {
     private fun onMain(action: () -> Unit) { main.post(action) }
 
     private suspend fun ensureAuth() {
-        if (auth.currentUser == null) { auth.signInAnonymously().await() }
+        if (auth.currentUser == null) auth.signInAnonymously().await()
         auth.currentUser?.getIdToken(true)?.await()
     }
 
@@ -46,7 +44,7 @@ object FirebaseClient {
                     .whereEqualTo("token", token.trim()).whereEqualTo("is_active", true)
                     .limit(1).get().await()
                 if (tokenSnap.isEmpty) {
-                    onMain { callback.onGagal(Gagal("TOKEN_TIDAK_ADA", "Token tidak dikenali.")); return@launch }
+                    onMain { callback.onGagal(Gagal("TOKEN_TIDAK_ADA", "Token tidak dikenali.")) }
                     return@launch
                 }
                 val tokenDoc = tokenSnap.documents[0]
@@ -54,8 +52,14 @@ object FirebaseClient {
                 val now = System.currentTimeMillis()
                 val mulaiAt = (td["mulai_at"] as? Timestamp)?.toDate()?.time ?: 0L
                 val expiredAt = (td["expired_at"] as? Timestamp)?.toDate()?.time ?: Long.MAX_VALUE
-                if (now < mulaiAt) { onMain { callback.onGagal(Gagal("BELUM_MULAI", "Ujian belum dibuka.")) }; return@launch }
-                if (now > expiredAt) { onMain { callback.onGagal(Gagal("EXPIRED", "Token sudah habis.")) }; return@launch }
+                if (now < mulaiAt) {
+                    onMain { callback.onGagal(Gagal("BELUM_MULAI", "Ujian belum dibuka.")) }
+                    return@launch
+                }
+                if (now > expiredAt) {
+                    onMain { callback.onGagal(Gagal("EXPIRED", "Token sudah habis.")) }
+                    return@launch
+                }
 
                 val existSess = db.collection("sessions")
                     .whereEqualTo("token_id", tokenDoc.id).whereEqualTo("uid", auth.currentUser?.uid)
@@ -64,8 +68,14 @@ object FirebaseClient {
                     val sess = existSess.documents[0]
                     val sd = sess.data!!
                     val status = sd["status"] as? String ?: ""
-                    if (status == "dihentikan") { onMain { callback.onGagal(Gagal("DIHENTIKAN", "Sesi dihentikan.")) }; return@launch }
-                    if (status == "selesai") { onMain { callback.onGagal(Gagal("SELESAI", "Ujian selesai.")) }; return@launch }
+                    if (status == "dihentikan") {
+                        onMain { callback.onGagal(Gagal("DIHENTIKAN", "Sesi dihentikan.")) }
+                        return@launch
+                    }
+                    if (status == "selesai") {
+                        onMain { callback.onGagal(Gagal("SELESAI", "Ujian selesai.")) }
+                        return@launch
+                    }
                     db.collection("violations").add(hashMapOf(
                         "session_id" to sess.id, "jenis" to "masuk_ulang",
                         "detail" to "Aplikasi dibuka kembali", "waktu" to Timestamp.now()
@@ -111,22 +121,31 @@ object FirebaseClient {
             try {
                 ensureAuth()
                 val snap = db.collection("sessions").document(sessionId).get().await()
-                if (!snap.exists()) { onMain { callback.onDetak(Detak(sesiHilang = true, status = "hilang")) }; return@launch }
+                if (!snap.exists()) {
+                    onMain { callback.onDetak(Detak(sesiHilang = true, status = "hilang")) }
+                    return@launch
+                }
                 val sd = snap.data!!
                 val status = sd["status"] as? String ?: "aktif"
                 if (status == "dihentikan" || status == "selesai") {
-                    onMain { callback.onDetak(Detak(sesiHilang = true, status = status)) }; return@launch
+                    onMain { callback.onDetak(Detak(sesiHilang = true, status = status)) }
+                    return@launch
                 }
                 val now = System.currentTimeMillis()
                 val batasMs = (sd["batas_waktu_at"] as? Timestamp)?.toDate()?.time ?: 0L
                 val sisa = maxOf(0, (batasMs - now) / 1000)
                 if (sisa == 0L) {
-                    db.collection("sessions").document(sessionId).update("status", "selesai", "selesai_at", Timestamp.now()).await()
-                    onMain { callback.onDetak(Detak(sisaDetik = 0, status = "selesai")) }; return@launch
+                    db.collection("sessions").document(sessionId).update(
+                        "status", "selesai", "selesai_at", Timestamp.now()
+                    ).await()
+                    onMain { callback.onDetak(Detak(sisaDetik = 0, status = "selesai")) }
+                    return@launch
                 }
                 db.collection("sessions").document(sessionId).update("terakhir_aktif", Timestamp.now()).await()
                 onMain { callback.onDetak(Detak(sisaDetik = sisa, status = status)) }
-            } catch (e: Exception) { onMain { callback.onOffline() } }
+            } catch (e: Exception) {
+                onMain { callback.onOffline() }
+            }
         }
     }
 
@@ -143,7 +162,9 @@ object FirebaseClient {
                     "jumlah_pelanggaran", FieldValue.increment(1), "terakhir_aktif", Timestamp.now()
                 ).await()
                 onMain { callback?.onSelesai(true) }
-            } catch (e: Exception) { onMain { callback?.onSelesai(false) } }
+            } catch (e: Exception) {
+                onMain { callback?.onSelesai(false) }
+            }
         }
     }
 
@@ -155,7 +176,9 @@ object FirebaseClient {
                     "status", "selesai", "selesai_at", Timestamp.now(), "terakhir_aktif", Timestamp.now()
                 ).await()
                 onMain { callback?.onSelesai(true) }
-            } catch (e: Exception) { onMain { callback?.onSelesai(false) } }
+            } catch (e: Exception) {
+                onMain { callback?.onSelesai(false) }
+            }
         }
     }
 }

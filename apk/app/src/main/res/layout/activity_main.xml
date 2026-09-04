@@ -1,384 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF13141A"
-    android:orientation="vertical">
+    android:background="#000000">
 
-    <!-- Top bar - Modern -->
-    <LinearLayout
-        android:id="@+id/navbar_top"
+    <WebView
+        android:id="@+id/webView"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="#FF1A1B23"
-        android:gravity="center_vertical"
+        android:layout_height="match_parent" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewCamera"
+        android:layout_width="80dp"
+        android:layout_height="107dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="8dp"
+        android:alpha="0.7"
+        android:scaleX="-1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
         android:orientation="horizontal"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:elevation="4dp">
+        android:padding="8dp"
+        android:background="#CC000000">
 
-        <!-- Timer badge -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="32dp"
-            android:background="@drawable/timer_badge"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="14dp"
-                android:layout_height="14dp"
-                android:src="@drawable/ic_timer"
-                app:tint="#FFFF6B6B"
-                android:importantForAccessibility="no" />
-
-            <TextView
-                android:id="@+id/chronometer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="6dp"
-                android:fontFamily="monospace"
-                android:textColor="#FFFFFFFF"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                tools:text="01:24:07" />
-        </LinearLayout>
-
-        <Space
-            android:layout_width="12dp"
-            android:layout_height="match_parent" />
-
-        <!-- Current time -->
         <TextView
-            android:id="@+id/tv_time"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="monospace"
-            android:textColor="#FF7C828C"
-            android:textSize="13sp"
-            tools:text="09:41" />
-
-        <View
+            android:id="@+id/tvNama"
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_weight="1" />
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FFFFFF"
+            android:textSize="12sp" />
 
-        <!-- Status indicators -->
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:textColor="#FF5252"
+            android:textSize="14sp"
+            android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tv_speed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textColor="#FF7C828C"
-                android:textSize="11sp"
-                tools:text="24 KB/s" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="#FF2A2D38" />
-
-            <TextView
-                android:id="@+id/tv_wifi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textColor="#FF7C828C"
-                android:textSize="11sp"
-                tools:text="WiFi" />
-
-            <TextView
-                android:id="@+id/tv_signal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="monospace"
-                android:textColor="#FF7C828C"
-                android:textSize="11sp"
-                android:visibility="gone"
-                tools:text="4G" />
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="14dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                android:background="#FF2A2D38" />
-
-            <TextView
-                android:id="@+id/tv_battery"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="monospace"
-                android:textColor="#FF7C828C"
-                android:textSize="11sp"
-                tools:text="86%" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tvPeserta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="#AAAAAA"
+            android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- Progress bar -->
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="3dp"
-        android:max="100"
-        android:progressDrawable="@drawable/progress_exam_modern"
-        android:visibility="gone" />
-
-    <!-- Content -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="#FFFFFFFF">
-
-        <WebView
-            android:id="@+id/webview"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <!-- Offline state -->
-        <LinearLayout
-            android:id="@+id/layout_offline"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFFFF"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:visibility="gone">
-
-            <FrameLayout
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/icon_tile_accent">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_offline"
-                    app:tint="@color/accent"
-                    android:importantForAccessibility="no" />
-            </FrameLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/exam_offline_title"
-                android:textColor="@color/ink"
-                android:textSize="18sp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:lineSpacingExtra="4dp"
-                android:text="@string/exam_offline_body"
-                android:textColor="@color/ink_muted"
-                android:textSize="14sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_retry"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/btn_outline_modern"
-                android:fontFamily="sans-serif-medium"
-                android:minWidth="160dp"
-                android:text="@string/exam_retry"
-                android:textColor="@color/accent"
-                android:textSize="14sp" />
-        </LinearLayout>
-
-        <!-- Error state -->
-        <LinearLayout
-            android:id="@+id/layout_error"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFFFF"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="40dp"
-            android:paddingEnd="40dp"
-            android:visibility="gone">
-
-            <FrameLayout
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:background="@drawable/icon_tile_danger">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_alert_circle"
-                    app:tint="@color/danger"
-                    android:importantForAccessibility="no" />
-            </FrameLayout>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:fontFamily="sans-serif-medium"
-                android:text="@string/exam_error_title"
-                android:textColor="@color/ink"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/tv_error_code"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="monospace"
-                android:gravity="center"
-                android:textColor="@color/ink_faint"
-                android:textSize="12sp"
-                tools:text="net::ERR_CONNECTION_CLOSED" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_retry_error"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/btn_outline_modern"
-                android:fontFamily="sans-serif-medium"
-                android:minWidth="160dp"
-                android:text="@string/exam_retry"
-                android:textColor="@color/accent"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </FrameLayout>
-
-    <!-- Bottom bar - Modern -->
     <LinearLayout
-        android:id="@+id/navbar_bottom"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="#FF1A1B23"
-        android:gravity="center_vertical"
+        android:layout_height="48dp"
+        android:layout_gravity="bottom"
         android:orientation="horizontal"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:elevation="8dp">
+        android:background="#CC000000"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="12dp">
 
-        <FrameLayout
-            android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            android:background="@drawable/chrome_btn_modern"
-            android:clickable="true"
-            android:focusable="true">
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_exit"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Keluar"
+            android:scaleType="centerInside" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_back"
-                app:tint="#FF7C828C"
-                android:importantForAccessibility="no" />
-        </FrameLayout>
-
-        <Space
-            android:layout_width="6dp"
-            android:layout_height="match_parent" />
-
-        <FrameLayout
-            android:id="@+id/btn_forward"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            android:background="@drawable/chrome_btn_modern"
-            android:clickable="true"
-            android:focusable="true">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_forward"
-                app:tint="#FF7C828C"
-                android:importantForAccessibility="no" />
-        </FrameLayout>
-
-        <Space
-            android:layout_width="6dp"
-            android:layout_height="match_parent" />
-
-        <FrameLayout
-            android:id="@+id/btn_refresh"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_weight="1"
-            android:background="@drawable/chrome_btn_modern"
-            android:clickable="true"
-            android:focusable="true">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_refresh"
-                app:tint="#FF7C828C"
-                android:importantForAccessibility="no" />
-        </FrameLayout>
-
-        <Space
-            android:layout_width="12dp"
-            android:layout_height="match_parent" />
-
-        <FrameLayout
-            android:id="@+id/btn_exit"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_weight="1.2"
-            android:background="@drawable/btn_exit_modern"
-            android:clickable="true"
-            android:focusable="true">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:src="@drawable/ic_exit"
-                    app:tint="#FFFF6B6B"
-                    android:importantForAccessibility="no" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:fontFamily="sans-serif-medium"
-                    android:text="Keluar"
-                    android:textColor="#FFFF6B6B"
-                    android:textSize="13sp" />
-            </LinearLayout>
-        </FrameLayout>
+        <ImageButton
+            android:id="@+id/btnForward"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="auto"
+            android:src="@drawable/ic_arrow_forward"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Kirim"
+            android:scaleType="centerInside" />
     </LinearLayout>
-
-</LinearLayout>
+</FrameLayout>

@@ -15,7 +15,7 @@ class InputAddressActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         b = ActivityInputAddressBinding.inflate(layoutInflater)
         setContentView(b.root)
-        SoundManager.init(this)
+        
 
         val scannedToken = intent.getStringExtra("scanned_token")
         if (scannedToken != null) {
