@@ -70,11 +70,15 @@
             android:contentDescription="Keluar"
             android:scaleType="centerInside" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
         <ImageButton
             android:id="@+id/btnForward"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_marginStart="auto"
             android:src="@drawable/ic_arrow_forward"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Kirim"
