@@ -13,6 +13,11 @@ import androidx.lifecycle.LifecycleOwner
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.face.FaceDetection
 import com.google.mlkit.vision.face.FaceDetectorOptions
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
+import java.util.concurrent.Executors
 
 class FaceDetectionManager(
     private val context: Context,
@@ -27,29 +32,35 @@ class FaceDetectionManager(
     )
     private var analyzing = false
     private var lastCheck = 0L
+    private val analysisExecutor = Executors.newSingleThreadExecutor()
 
     fun mulai() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-        cameraProviderFuture.addListener({
-            val cameraProvider = cameraProviderFuture.get()
-            val preview = Preview.Builder().build().also { it.surfaceProvider = previewView.surfaceProvider }
-            val analysis = ImageAnalysis.Builder()
-                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .build()
-            analysis.setAnalyzer(ContextCompat.getMainExecutor(context)) { img -> analisis(img) }
-
+        CoroutineScope(Dispatchers.Main).launch {
             try {
-                cameraProvider.unbindAll()
-                cameraProvider.bindToLifecycle(lifecycleOwner, CameraSelector.DEFAULT_FRONT_CAMERA, preview, analysis)
+                val cameraProvider = ProcessCameraProvider.getInstance(context).await()
+                val preview = Preview.Builder().build().also {
+                    it.surfaceProvider = previewView.surfaceProvider
+                }
+                val analysis = ImageAnalysis.Builder()
+                    .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                    .build()
+                analysis.setAnalyzer(analysisExecutor) { img -> analisis(img) }
+                try {
+                    cameraProvider.unbindAll()
+                    cameraProvider.bindToLifecycle(lifecycleOwner, CameraSelector.DEFAULT_FRONT_CAMERA, preview, analysis)
+                } catch (e: Exception) {
+                    Log.e("FaceDetect", "Camera bind failed", e)
+                }
             } catch (e: Exception) {
-                Log.e("FaceDetect", "Camera bind failed", e)
+                Log.e("FaceDetect", "Camera provider failed", e)
             }
-        }, ContextCompat.getMainExecutor(context))
+        }
     }
 
     fun hentikan() {
         analyzing = false
         detector.close()
+        analysisExecutor.shutdownNow()
     }
 
     private fun analisis(img: ImageProxy) {
@@ -58,20 +69,13 @@ class FaceDetectionManager(
         lastCheck = now
         if (analyzing) { img.close(); return }
         analyzing = true
-
         try {
             val mediaImage = img.image ?: run { analyzing = false; img.close(); return }
             val image = InputImage.fromMediaImage(mediaImage, img.imageInfo.rotationDegrees)
             detector.process(image)
-                .addOnSuccessListener { faces ->
-                    if (faces.isEmpty()) onNoFace()
-                    analyzing = false
-                }
+                .addOnSuccessListener { if (it.isEmpty()) onNoFace(); analyzing = false }
                 .addOnFailureListener { analyzing = false }
                 .addOnCompleteListener { img.close() }
-        } catch (e: Exception) {
-            analyzing = false
-            img.close()
-        }
+        } catch (e: Exception) { analyzing = false; img.close() }
     }
 }
