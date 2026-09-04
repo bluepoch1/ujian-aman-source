@@ -25,7 +25,7 @@ object SessionManager {
     fun hentikan(context: Context) {
         active = false
         sessionId?.let { sid ->
-            FirebaseClient.akhiriSesi(sid, "selesai", context) {}
+            FirebaseClient.akhiriSesi(sid, context, null)
         }
     }
 
